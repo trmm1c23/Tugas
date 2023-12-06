@@ -1,0 +1,41 @@
+C. Komponen-Komponen Komputer
+  Secara fisik,komputer terdiri dari beberapa komponen yang merupakan suatu sistem .
+Sistem adalah komponen - komponen yang saling bekerjasama membentuk suatu kesatuan,
+apabila salah satu komponen tidak berfungsi,akan mengakibatkan tidak berfungsi nya 
+proses-proses yang ada pada komputer dengan baik.
+  Hardaware berfungsi memudahkan pengguna komputer dalam bekerja atau dengan adanya 
+hardware yang lengkap maka sistem komputer dapat berjalan dengan baik.Untuk fungsinya 
+adalah sesuai dengan jenis harware yang ada.
+Berdasarkan fungsinya menurut Dudi Misky,(2005:12),perangkat keras komputer dibagi 
+menjadi 6.
+
+1. Input Device
+Input Device adalah perangkat yang berfungsi untuk memasukan data kedalam CPU. 
+Misalnya : mouse,keyboard,joystick, dan lain-lain.
+
+2. Central Processing Unit (CPU)
+Central Processing Unit adalah merupakan pusat dari semua pemrosesan data yang 
+diinputkan kekomputer dan terbagi dalam dua bagian:
+a. Satuan Kendali (Control Unit)
+b. Satuan Logika Aritmatika (Aritmatic Logical Unit). 
+Central Processing Unit (CPU) berfungsi untuk mengatur perangkat utama komputer yang 
+mengelola seluruh aktivitas komputer.CPU mengambil instruksi dari memori ,menerjemahkannya
+menjadi sejumlah tindakan sederhana.CPU juga memiliki Unit Logika Aritmatika (ALU) yang dapat
+melakukan operasi-operasi pejumlahan,pengurangan,inverse, OR, AND, dan XOR dan bentuk biner.
+
+3. Memory
+Memori yang menjadi pendukung CPU dalam melakukan proses,dimana memori bertugas untuk menampung 
+data yang akan diproses serta data hasil proses dan dari CPU.
+
+4.Output device
+output device adalah perangkat yang menjadi sarana untuk menampilkan hasil proses sebuah prosesor.
+seperti : printer, display monitor , load sound / speaker, pengontrolan lewat inter face dan 
+lain-lain.
+
+5. interface(penghubung)
+interface adalah sarana penghubung antara CPU dengan perangkat input atau otput.
+
+6. secodary stroge 
+secondari stroge adalah alat yang digunakan untuk menyimpan program dan data tidak dilibatkan 
+dalam proses yang aktif pada suatu saat, alat ini terletak atau terpisah diluar main memory
+
