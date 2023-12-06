@@ -1,0 +1,44 @@
+B. Jenis-JenisMediaPenyimpanan(no.18)
+
+Untuk saat ini Media Penyimpanan Komputer terbagimenjadi 3 kategori, yaitu Media Penyimpanan Magnetik(MagneticDisk),Media Penyimpanan Optical (OpticalDisk),da nMedia
+Penyimpanan Awan(CloudStorage). 
+1. PenyimpananMagnetik(MagneticDisk)
+PenyimpananMagnetikmerupakanmediapenyimpanan  yang termasukkedal amp enyimpanan sekuder (secondary storage) yang paling banyak dipakaipada
+sistem komputer modern. Cara Kerjanya :
+(Hanyabeberapa) Pada saat disk digunakan, motor drive berputar dengan kecepatan yang sangat tinggi.Adasebuah read−write head yang ditempatkan diatas permukaan
+piringan tersebut. Permukaan disk terbagi atas
+beberapa track yang masih terbagi lagi menjadi beberap asektor.
+Cakram fixed−headmemiliki satu head untuk
+tiap−tiap track,sedangkan cakrammoving−head(atau seringdi kenal dengan nama cakram keras ) hanya memiliki satu head yang harus dipindah−pindahkan untuk mengakses 
+dari satu track ke track yang lainnya. Macam-macam media dari Magnetik Disk :
+a. Disket
+Pada tahun 1969,floppy diskpertama kali diperkenalkan.Saat itu hanya bisa membaca(read-only),jadi ketika data tersimpan tidak dapat dimodifikasi maupun dihapus.
+Ukurannya 8 inch dan dapat menyimpan data sekitar 80kB. Empat tahun kemudian, floppy disk yang sama muncul dan dapat menyimpan data sebanyak256kB.Selain itu,
+memiliki kemampuan dapat dituliskembali(writeable). Perkembangan selanjutnya, pada tahun 1990lahir disk dengan ukuran 3 inci yang dapat menyimpandatasekitar 250MB,atau
+biasa disebut juga Zip disk. 
+
+b. Harddisk
+Hard disk adalah jenisdiskyangbersifat tetap, tidak perlu dikeluar-masukkan sebagaimana disket floppy. Umumnya terbuat dari bahan logam padu yang berbentukpiringan atau pelat.
+Sebuah hard disk biasanya terdiri dari lebih satu piringanatau lempengan yang dilapisi dengan oksidabesi. Cara penyimpanan datanya hampir sama dengan disket floppy.
+Bahan hard disk yang keras dan kapasitas simpannya yang lebih besar, juga membedakan nya dari disket floppy yang bahannya relatifelastis. Harddisk merupakan salah satu
+piranti yang tidak terpisahkan dalam sistem komputer masa kini. Mulai dari komputer personal hingga mesin sekelas mainframe dan super kompute rmenggunakan piranti harddisk
+sebagai media penyimpanan datanya.Harddisk pertama kali ditemukan pada dekade 1950-an. Tidak seperti saat ini,hard disk kala itu memiliki ukuran diameter hingga 20 inci 
+dengan kapasitas hanya beberapa megabyte. Pada masa itu,piranti ini disebut sebagai “fixeddisks” atau “winchesters” (nama kode untuk produk keluaran IBM).Belakangan produk 
+itu dikenal sebagai “harddisk” untukmembedakannya dengan “floppy disks”.(Mulyanto et al.2016) HardDisk juga merupakan media penyimpanan dengan teknologi piringa nmagnetik 
+(magneticdisk).Piringan magnetik menggunakan metode pengaksesan secara langsung.Itulah sebabnya,perangkat piringan magnetik biasa disebut DSAD(DirectAccessStorageDevice).
+Data yang terletak pada suatu lokasi pada piringan dapat dibaca atau ditulis secara langsung, tanpa membaca data yang lain.Dengan demikian pembacaan data dapat dilakukan
+dengan cepat. Harddisk tersusun atas sejumlah piringan yang ditumpuk-tumpuk,setiap piringan mempunyai dua buah permukaan atas dan bawah.Namun,permukaan atas pada piringan
+teratas dan permukaan bawah padapiringan terbawah tidak digunakan sebagai penyimpanan data.(Aggraini2016)
+
+c. Flashdisk 
+Flashdisk adalah piranti penyimpan dari floppy drive jenis lain dengan menggunakan kabel interface jenis USB (UniversalSerialBus).Flash drive ini bisa dibaca dan ditulis,
+sangat praktis dan ringan dengan ukuran berkisar 50x15x6mm.Bahkan untuk saat ini,ukurannya semakin kecil dengan kapasitas yang jauhlebih besar,hingga mencapai 1 TB.USB 
+flash drive adalah alat penyimpanan data memori flash tipe NAND yang memiliki alat penghubung USB yang terintegrasi. Flash drive ini biasanya kecil,ringan,serta bisa dibaca 
+dan ditulis. Per November 2006, kapasitas yang tersedia untuk USB flash drive ada dari 128 mega byte sampai 64 gigabyte.(Mulyantoetal.2016)
+
+d. MemoryCard
+Media penyimpanan yang banyak dipakai pada peralatan komputer dan elektronik,seperti kamera digital,laptop, handphone,ipodsertavideo gameconsole. e. ZipDrive Merupakan 
+media penyimpanan magnetic dengan head yang sangat kecil dan dapat menampung data hingga MB.Format ini menjadi yang paling populer diantara produk-produk jenis super
+floppy tetapi tidak pernah mencapai status standar untuk menggantikan floppy disk 3,5 inci.Kemudian,CD-RW mengganti kanposisi disk Zip, dan perekam CD internal dan eksternal 
+Zip-650 atau Zip-CD tersebut dijual dengan
+merekZip.(Khoirul2013)
