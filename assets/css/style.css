@@ -1,0 +1,1365 @@
+/* =====================================================================
+   PORTAL RESMI BMKG - DESAIN IDENTIK DENGAN SITUS WEB BMKG
+   Badan Meteorologi, Klimatologi, dan Geofisika
+   Integrasi Sistem: db_sistem_terintegrasi
+   ===================================================================== */
+
+:root {
+  /* Warna Resmi BMKG */
+  --bmkg-navy-dark: #002244;
+  --bmkg-navy: #003366;
+  --bmkg-blue-deep: #004a80;
+  --bmkg-blue: #0066b3;
+  --bmkg-blue-bright: #0088d6;
+  --bmkg-cyan: #00a4e4;
+  --bmkg-sky: #e6f4fc;
+  --bmkg-sky-light: #f0f8fd;
+  
+  --bmkg-gold: #ffb800;
+  --bmkg-yellow: #f59e0b;
+  --bmkg-red: #d92525;
+  --bmkg-green: #108e48;
+
+  --bg-page: #f4f7fa;
+  --bg-card: #ffffff;
+  --border-light: #e2e8f0;
+  --border-bmkg: #b8daf2;
+
+  --text-dark: #1e293b;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --text-white: #ffffff;
+
+  --font-main: 'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+}
+
+/* Reset & Dasar */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =====================================================================
+   1. TOPBAR (UTILITY BAR BMKG)
+   ===================================================================== */
+.topbar {
+  background-color: var(--bmkg-navy-dark);
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  padding: 0.4rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.topbar-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.topbar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.topbar-item i {
+  color: var(--bmkg-cyan);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.topbar-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.topbar-socials a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.topbar-socials a:hover {
+  color: var(--bmkg-cyan);
+}
+
+.topbar-badge-db {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.topbar-badge-db::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background-color: #34d399;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* =====================================================================
+   2. HEADER UTAMA (LOGO & IDENTITAS RESMI BMKG)
+   ===================================================================== */
+.site-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.9rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.bmkg-logo-img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--bmkg-navy);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--bmkg-blue);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.brand-motto {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 1px;
+}
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-search {
+  position: relative;
+  width: 280px;
+}
+
+.header-search input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.25rem;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  background-color: var(--bmkg-sky-light);
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: all 0.2s;
+}
+
+.header-search input:focus {
+  border-color: var(--bmkg-blue);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 102, 179, 0.15);
+}
+
+.header-search i {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+/* =====================================================================
+   3. NAVBAR RESMI BMKG (NAVIGASI BIRU BMKG)
+   ===================================================================== */
+.site-navbar {
+  background: linear-gradient(90deg, #003d73 0%, #005a9c 50%, #0077c8 100%);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  overflow-x: auto;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.15rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.nav-link.active {
+  background-color: rgba(0, 34, 68, 0.35);
+  border-bottom: 3px solid var(--bmkg-gold);
+  color: #ffffff;
+}
+
+/* =====================================================================
+   4. RUNNING TEXT / PERINGATAN DINI CUACA (TICKER ALERT)
+   ===================================================================== */
+.warning-ticker-bar {
+  background-color: #fff9e6;
+  border-bottom: 1px solid #fed7aa;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  font-size: 0.82rem;
+}
+
+.ticker-label {
+  background: linear-gradient(135deg, #d92525 0%, #b91c1c 100%);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.45rem 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  z-index: 2;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+}
+
+.ticker-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-marquee {
+  display: inline-block;
+  animation: ticker-slide 32s linear infinite;
+  color: #9a3412;
+  font-weight: 600;
+}
+
+@keyframes ticker-slide {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* =====================================================================
+   5. KONTEN UTAMA & CONTAINER
+   ===================================================================== */
+.main-wrapper {
+  max-width: 1320px;
+  width: 100%;
+  margin: 1.5rem auto 3rem auto;
+  padding: 0 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Tab Switcher Logic */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================================
+   6. HERO CUACA (OFFICIAL BMKG WEATHER BANNER)
+   ===================================================================== */
+.bmkg-weather-hero {
+  background: linear-gradient(135deg, #004a80 0%, #0066b3 50%, #0099e6 100%);
+  border-radius: var(--radius-lg);
+  color: #ffffff;
+  padding: 2rem 2.25rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle atmospheric pattern */
+.bmkg-weather-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at 85% 25%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-top-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-location-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hero-badge-official {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(4px);
+}
+
+.hero-location-title {
+  font-family: var(--font-heading);
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.hero-location-sub {
+  font-size: 0.95rem;
+  color: #e0f2fe;
+}
+
+.hero-sync-btn-wrap {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+/* Hero Weather Main Display */
+.hero-weather-body {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding: 0.5rem 0 1.25rem 0;
+}
+
+.hero-icon-box {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.hero-icon-box img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+}
+
+.hero-temp-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-temp-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.hero-temp-num {
+  font-family: var(--font-heading);
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+}
+
+.hero-temp-deg {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bmkg-gold);
+}
+
+.hero-condition-text {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-adm4-tag {
+  font-size: 0.8rem;
+  color: #bae6fd;
+  margin-top: 0.35rem;
+  font-family: monospace;
+}
+
+/* Integration Alert Bar inside Hero */
+.hero-integration-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 24, 48, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.15rem;
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  position: relative;
+  z-index: 1;
+}
+
+.integration-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.integration-strip-left i {
+  font-size: 1.1rem;
+  color: #34d399;
+}
+
+/* =====================================================================
+   7. FILTER WILAYAH BERJENJANG (OFFICIAL CARD)
+   ===================================================================== */
+.bmkg-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.card-header-bmkg {
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card-header-bmkg h3 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--bmkg-navy);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-header-bmkg h3 i {
+  color: var(--bmkg-blue);
+}
+
+.card-body-bmkg {
+  padding: 1.25rem;
+}
+
+/* Filter Controls */
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.form-select, .form-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.form-select:focus, .form-input:focus {
+  border-color: var(--bmkg-blue);
+  box-shadow: 0 0 0 3px rgba(0, 102, 179, 0.15);
+}
+
+/* Tombol-Tombol */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.15rem;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.btn-bmkg-primary {
+  background-color: var(--bmkg-blue);
+  color: #ffffff;
+}
+
+.btn-bmkg-primary:hover {
+  background-color: var(--bmkg-navy);
+}
+
+.btn-bmkg-success {
+  background-color: var(--bmkg-green);
+  color: #ffffff;
+}
+
+.btn-bmkg-success:hover {
+  background-color: #0b7036;
+}
+
+.btn-bmkg-gold {
+  background-color: var(--bmkg-gold);
+  color: #002244;
+}
+
+.btn-bmkg-gold:hover {
+  background-color: #e5a600;
+}
+
+.btn-outline-bmkg {
+  background-color: #ffffff;
+  color: var(--bmkg-blue);
+  border: 1px solid var(--bmkg-blue);
+}
+
+.btn-outline-bmkg:hover {
+  background-color: var(--bmkg-sky-light);
+}
+
+.btn-danger-bmkg {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+}
+
+.btn-danger-bmkg:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.76rem;
+}
+
+/* =====================================================================
+   8. PARAMETER CUACA (METRICS GRID PUTIH RESMI)
+   ===================================================================== */
+.bmkg-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.metric-box {
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--bmkg-blue);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.metric-box:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.metric-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--bmkg-sky);
+  color: var(--bmkg-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.metric-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-meta span.label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.metric-meta h4 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--bmkg-navy);
+  line-height: 1.2;
+}
+
+.metric-meta span.sub {
+  font-size: 0.72rem;
+  color: var(--text-light);
+}
+
+/* =====================================================================
+   9. PRAKIRAAN PER JAM (HOURLY HORIZONTAL SLIDER)
+   ===================================================================== */
+.hourly-container {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-bmkg) transparent;
+}
+
+.hourly-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.hourly-container::-webkit-scrollbar-thumb {
+  background-color: var(--border-bmkg);
+  border-radius: 999px;
+}
+
+.hourly-item-card {
+  min-width: 130px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1rem 0.85rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s;
+}
+
+.hourly-item-card:hover {
+  border-color: var(--bmkg-blue);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.hourly-item-time {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--bmkg-navy);
+}
+
+.hourly-item-date {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.hourly-item-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.hourly-item-temp {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--bmkg-blue);
+}
+
+.hourly-item-desc {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-body);
+  line-height: 1.2;
+  min-height: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hourly-item-extra {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-light);
+  padding-top: 0.4rem;
+  width: 100%;
+}
+
+/* =====================================================================
+   10. PRAKIRAAN 3 HARI (DAILY CARDS)
+   ===================================================================== */
+.daily-cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.daily-item-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 3px solid var(--bmkg-blue);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.daily-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.daily-item-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.daily-item-icon {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.daily-item-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--bmkg-navy);
+}
+
+.daily-item-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.daily-item-right {
+  text-align: right;
+}
+
+.daily-item-temp {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.daily-item-temp span.min {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.daily-item-hum {
+  font-size: 0.75rem;
+  color: var(--bmkg-blue);
+  margin-top: 0.2rem;
+}
+
+/* =====================================================================
+   11. GEMPABUMI & TSUNAMI STYLING
+   ===================================================================== */
+.gempa-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.gempa-highlight-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border-left: 5px solid var(--bmkg-red);
+}
+
+.gempa-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.gempa-mag-badge {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--bmkg-red);
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  line-height: 1;
+}
+
+.gempa-potensi-box {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.gempa-shakemap-wrap {
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gempa-shakemap-wrap img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+/* =====================================================================
+   12. KUALITAS UDARA (PM2.5) STYLING
+   ===================================================================== */
+.udara-status-card {
+  background: linear-gradient(135deg, #065f46 0%, #059669 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.udara-score-num {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.baku-mutu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.85rem;
+}
+
+.baku-mutu-item {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  border-top: 4px solid var(--bmkg-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Tabel Data Resmi */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.bmkg-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.bmkg-table thead th {
+  background-color: #f1f5f9;
+  color: var(--bmkg-navy);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 1rem;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.bmkg-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-dark);
+  vertical-align: middle;
+}
+
+.bmkg-table tbody tr:hover td {
+  background-color: var(--bmkg-sky-light);
+}
+
+/* =====================================================================
+   12. MANAJEMEN WILAYAH (3 KOLOM RESMI)
+   ===================================================================== */
+.wilayah-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.wilayah-col-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.wilayah-col-header {
+  padding: 0.85rem 1.15rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8fafc;
+}
+
+.wilayah-col-header h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--bmkg-navy);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.wilayah-items-list {
+  padding: 0.75rem;
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wilayah-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  background-color: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  transition: all 0.15s;
+}
+
+.wilayah-item-row:hover {
+  background-color: var(--bmkg-sky-light);
+  border-color: var(--border-bmkg);
+}
+
+/* =====================================================================
+   13. DOKUMENTASI API PLAYGROUND
+   ===================================================================== */
+.code-console-bmkg {
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  color: #38bdf8;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.82rem;
+  max-height: 320px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* =====================================================================
+   14. FOOTER RESMI BMKG (4 KOLOM)
+   ===================================================================== */
+.site-footer {
+  background-color: var(--bmkg-navy-dark);
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  margin-top: auto;
+  border-top: 3px solid var(--bmkg-cyan);
+}
+
+.footer-top {
+  padding: 3rem 1.5rem 2rem 1.5rem;
+}
+
+.footer-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.footer-col h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--bmkg-blue);
+  display: inline-block;
+}
+
+.footer-col p {
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.footer-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--bmkg-cyan);
+}
+
+.footer-bottom {
+  background-color: #00172e;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+/* =====================================================================
+   15. MODAL & TOAST
+   ===================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 34, 68, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: var(--bmkg-navy);
+  color: #ffffff;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* Toast */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.toast {
+  background: #ffffff;
+  border-left: 4px solid var(--bmkg-blue);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.25rem;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 280px;
+}
+
+.toast-success { border-left-color: var(--bmkg-green); }
+.toast-error   { border-left-color: var(--bmkg-red); }
+.toast-warning { border-left-color: var(--bmkg-yellow); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-weather-body {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .hero-icon-box {
+    margin: 0 auto;
+  }
+  .hero-temp-value-row {
+    justify-content: center;
+  }
+  .hero-condition-text {
+    justify-content: center;
+  }
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-tools {
+    width: 100%;
+  }
+  .header-search {
+    width: 100%;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+  .filter-row {
+    grid-template-columns: 1fr;
+  }
+}

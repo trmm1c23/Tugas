@@ -1,0 +1,583 @@
+<?php
+/**
+ * PORTAL RESMI PRAKIRAAN CUACA, KUALITAS UDARA & GEMPABUMI BMKG ACEH
+ * Badan Meteorologi, Klimatologi, dan Geofisika (BMKG)
+ */
+require_once __DIR__ . '/config/database.php';
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal Resmi BMKG Provinsi Aceh. Menyajikan data prakiraan cuaca, kualitas udara (PM2.5), dan informasi gempabumi terkini realtime.">
+  <title>BMKG Aceh - Badan Meteorologi, Klimatologi, dan Geofisika</title>
+
+  <!-- Favicon BMKG -->
+  <link rel="icon" type="image/png" href="assets/img/logo-bmkg.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Free Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Chart.js 4 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Stylesheet Identik BMKG -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       1. TOPBAR UTILITY (NAVY GELAP BMKG)
+       ===================================================================== -->
+  <div class="topbar">
+    <div class="topbar-container">
+      <div class="topbar-left">
+        <div class="topbar-item" id="live-clock">
+          <i class="fa-regular fa-clock"></i> Memuat waktu...
+        </div>
+        <div class="topbar-item">
+          <i class="fa-solid fa-location-dot"></i> Wilayah Cakupan: <strong>Provinsi Aceh</strong>
+        </div>
+        <div class="topbar-item">
+          <i class="fa-solid fa-phone"></i> Call Center: <strong>196</strong>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="topbar-socials">
+          <a href="https://twitter.com/infoBMKG" target="_blank" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.facebook.com/InfoBMKG" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/infobmkg" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/infoBMKG" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <div style="font-weight: 700; color: #ffffff;">
+          <span style="color:var(--bmkg-cyan);">ID</span> | <span>EN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       2. HEADER UTAMA (LOGO & IDENTITAS RESMI BMKG ACEH)
+       ===================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.php" class="brand-section">
+        <img src="assets/img/logo-bmkg.png" alt="Logo BMKG" class="bmkg-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">BMKG PROVINSI ACEH</span>
+          <span class="brand-subtitle">Badan Meteorologi, Klimatologi, dan Geofisika</span>
+          <span class="brand-motto">Stasiun Meteorologi Wilayah Aceh &bull; Cepat, Tepat, Akurat, Luas, dan Mudah Dipahami</span>
+        </div>
+      </a>
+
+      <div class="header-tools">
+        <div class="header-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="header-search-input" placeholder="Cari gampong/kecamatan di Aceh...">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       3. NAVBAR RESMI BMKG (3 MENU UTAMA RESMI)
+       ===================================================================== -->
+  <nav class="site-navbar">
+    <div class="navbar-container">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <button class="nav-link active" data-tab="dashboard" id="tab-btn-dashboard">
+            <i class="fa-solid fa-cloud-sun"></i> PRAKIRAAN CUACA
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-tab="udara" id="tab-btn-udara">
+            <i class="fa-solid fa-smog"></i> KUALITAS UDARA
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-tab="gempa" id="tab-btn-gempa">
+            <i class="fa-solid fa-house-crack"></i> GEMPABUMI &amp; TSUNAMI
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- =====================================================================
+       4. TICKER ALERT PERINGATAN DINI CUACA (RUNNING TEXT RESMI ACEH)
+       ===================================================================== -->
+  <div class="warning-ticker-bar">
+    <div class="ticker-label">
+      <i class="fa-solid fa-triangle-exclamation"></i> PERINGATAN DINI CUACA ACEH
+    </div>
+    <div class="ticker-content">
+      <div class="ticker-marquee">
+        Peringatan Dini Cuaca Provinsi Aceh: Waspada potensi hujan dengan intensitas sedang hingga lebat disertai kilat/petir dan angin kencang di wilayah Aceh Utara, Kota Lhokseumawe, Bireuen, Aceh Barat, dan Aceh Besar. Selalu pantau pembaruan cuaca resmi BMKG Stasiun Meteorologi Provinsi Aceh.
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       5. KONTEN UTAMA
+       ===================================================================== -->
+  <div class="main-wrapper">
+
+    <!-- ===================================================================
+         TAB 1: PRAKIRAAN CUACA ACEH
+         =================================================================== -->
+    <main class="tab-content active" id="tab-dashboard">
+
+      <!-- Filter Wilayah Berjenjang BMKG Aceh -->
+      <section class="bmkg-card">
+        <div class="card-header-bmkg">
+          <h3><i class="fa-solid fa-location-crosshairs"></i> Pilih Wilayah di Provinsi Aceh (Tingkat Gampong / Desa - ADM4)</h3>
+          <div>
+            <button class="btn btn-outline-bmkg btn-sm" id="btn-refresh-weather" title="Segarkan Data dari API BMKG">
+              <i class="fa-solid fa-arrows-rotate"></i> Perbarui
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body-bmkg">
+          <div class="filter-row">
+            <div class="form-group">
+              <label class="form-label" for="sel-kabupaten">Kabupaten / Kota di Aceh</label>
+              <select id="sel-kabupaten" class="form-select">
+                <option value="">Memuat Kabupaten Aceh...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="sel-kecamatan">Kecamatan</label>
+              <select id="sel-kecamatan" class="form-select">
+                <option value="">Pilih Kabupaten Dahulu</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="sel-kelurahan">Gampong / Desa / Kelurahan (Kode ADM4)</label>
+              <select id="sel-kelurahan" class="form-select">
+                <option value="">Pilih Kecamatan Dahulu</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HERO SHOWCASE CUACA RESMI BMKG ACEH (BERSIH DARI TEKS DATABASE) -->
+      <section class="bmkg-weather-hero">
+        <div class="hero-top-info">
+          <div class="hero-location-block">
+            <span class="hero-badge-official">
+              <i class="fa-solid fa-circle-check"></i> Sumber Resmi: Open Data BMKG Provinsi Aceh
+            </span>
+            <h1 class="hero-location-title" id="hero-lokasi">Memuat Wilayah...</h1>
+            <p class="hero-location-sub" id="hero-sublokasi">Pilih wilayah dari filter di atas</p>
+          </div>
+
+          <div class="hero-sync-btn-wrap">
+            <span class="hero-adm4-tag" id="hero-adm4">
+              <i class="fa-solid fa-fingerprint"></i> ADM4: --
+            </span>
+          </div>
+        </div>
+
+        <!-- Weather Main Body -->
+        <div class="hero-weather-body">
+          <div class="hero-icon-box">
+            <img id="hero-icon" src="https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah berawan-am.svg" alt="Icon Cuaca BMKG">
+          </div>
+
+          <div class="hero-temp-box">
+            <div class="hero-temp-value-row">
+              <span class="hero-temp-num" id="hero-temp">--</span>
+              <span class="hero-temp-deg">&deg;C</span>
+            </div>
+            <div class="hero-condition-text" id="hero-cond">
+              <i class="fa-solid fa-spinner fa-spin"></i> Mengambil data dari API BMKG...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Parameter Cuaca Resmi (Grid Kotak Putih) -->
+      <section class="bmkg-metrics-grid">
+        <div class="metric-box">
+          <div class="metric-icon-wrap"><i class="fa-solid fa-droplet"></i></div>
+          <div class="metric-meta">
+            <span class="label">Kelembapan Udara</span>
+            <h4 id="val-humidity">--%</h4>
+            <span class="sub">Persentase uap air</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <div class="metric-icon-wrap"><i class="fa-solid fa-wind"></i></div>
+          <div class="metric-meta">
+            <span class="label">Kecepatan Angin</span>
+            <h4 id="val-wind">-- km/jam</h4>
+            <span class="sub" id="val-wind-dir">Arah: --</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <div class="metric-icon-wrap"><i class="fa-solid fa-cloud"></i></div>
+          <div class="metric-meta">
+            <span class="label">Tutupan Awan</span>
+            <h4 id="val-cloud">--%</h4>
+            <span class="sub">Tutupan langit</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <div class="metric-icon-wrap"><i class="fa-solid fa-cloud-rain"></i></div>
+          <div class="metric-meta">
+            <span class="label">Curah Hujan</span>
+            <h4 id="val-rain">-- mm</h4>
+            <span class="sub">Prediksi akumulasi</span>
+          </div>
+        </div>
+
+        <div class="metric-box">
+          <div class="metric-icon-wrap"><i class="fa-solid fa-compass"></i></div>
+          <div class="metric-meta">
+            <span class="label">Koordinat Lokasi</span>
+            <h4 id="val-geo" style="font-size:1.05rem;">--</h4>
+            <span class="sub">Latitude / Longitude</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slider Cuaca Per 3 Jam Resmi BMKG -->
+      <section class="bmkg-card">
+        <div class="card-header-bmkg">
+          <h3><i class="fa-solid fa-clock"></i> Prakiraan Cuaca Setiap 3 Jam (Hari Ini &amp; Besok)</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">
+            <i class="fa-solid fa-arrow-right"></i> Geser ke kanan untuk melihat jam berikutnya
+          </span>
+        </div>
+        <div class="card-body-bmkg">
+          <div class="hourly-container" id="hourly-scroll">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Prakiraan Cuaca 3 Hari (Daily Summary) -->
+      <section class="bmkg-card">
+        <div class="card-header-bmkg">
+          <h3><i class="fa-solid fa-calendar-days"></i> Prakiraan Cuaca 3 Hari ke Depan</h3>
+        </div>
+        <div class="card-body-bmkg">
+          <div class="daily-cards-row" id="daily-grid">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===================================================================
+         TAB 2: KUALITAS UDARA (PENGGANTI GRAFIK & TREN)
+         =================================================================== -->
+    <main class="tab-content" id="tab-udara">
+      
+      <!-- Banner Status Mutu Udara Aceh -->
+      <div class="udara-status-card">
+        <div>
+          <span style="background:rgba(255,255,255,0.2); padding:0.25rem 0.65rem; border-radius:999px; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">
+            <i class="fa-solid fa-wind"></i> Indeks Kualitas Udara (PM2.5) Wilayah Aceh
+          </span>
+          <h2 style="font-family:var(--font-heading); font-size:2rem; font-weight:800; margin-top:0.4rem;" id="udara-kategori-title">Kualitas Udara: BAIK</h2>
+          <p style="font-size:0.92rem; color:#d1fae5; max-width:650px;" id="udara-rekomendasi">
+            Tingkat mutu udara sangat baik, tidak memberikan dampak buruk bagi kesehatan manusia, hewan, maupun tumbuhan. Aman untuk seluruh aktivitas luar ruangan di Provinsi Aceh.
+          </p>
+        </div>
+        <div style="text-align:right;">
+          <div class="udara-score-num" id="udara-pm25-val">12.4</div>
+          <div style="font-size:0.88rem; color:#a7f3d0; font-weight:600;">&micro;g/m&sup3; (Partikulat PM2.5)</div>
+          <div style="font-size:0.72rem; color:#6ee7b7; margin-top:0.25rem;" id="udara-update-time">Pembaruan: Hari ini</div>
+        </div>
+      </div>
+
+      <!-- Pemantau Stasiun di Wilayah Aceh -->
+      <section class="bmkg-card">
+        <div class="card-header-bmkg">
+          <h3><i class="fa-solid fa-tower-observation"></i> Stasiun Pemantau Kualitas Udara BMKG di Provinsi Aceh</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Parameter: Partikulat PM2.5 &amp; PM10</span>
+        </div>
+        <div class="card-body-bmkg">
+          <div class="bmkg-metrics-grid" id="udara-stations-grid">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Grafik Tren 24 Jam PM2.5 -->
+      <section class="bmkg-card">
+        <div class="card-header-bmkg">
+          <h3><i class="fa-solid fa-chart-area"></i> Grafik Tren Konsentrasi Partikulat PM2.5 (24 Jam Terakhir)</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-solid fa-circle-check" style="color:var(--bmkg-green);"></i> Kategori Baku Mutu Baik (&lt; 15.5 &micro;g/m&sup3;)</span>
+        </div>
+        <div class="card-body-bmkg">
+          <div style="position:relative; height:280px; width:100%;">
+            <canvas id="udaraTrendChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Standar Baku Mutu BMKG -->
+      <section class="bmkg-card">
+        <div class="card-header-bmkg">
+          <h3><i class="fa-solid fa-scale-balanced"></i> Standar Baku Mutu Konsentrasi Udara Ambien (BMKG)</h3>
+        </div>
+        <div class="card-body-bmkg">
+          <div class="baku-mutu-grid">
+            <div class="baku-mutu-item" style="border-top-color:#10b981;">
+              <strong style="color:#047857; font-size:0.95rem;">BAIK</strong>
+              <div style="font-size:1.15rem; font-weight:800; color:#1e293b;">0 - 15.5 &micro;g/m&sup3;</div>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Tingkat mutu udara sangat baik.</p>
+            </div>
+            <div class="baku-mutu-item" style="border-top-color:#0284c7;">
+              <strong style="color:#0369a1; font-size:0.95rem;">SEDANG</strong>
+              <div style="font-size:1.15rem; font-weight:800; color:#1e293b;">15.6 - 55.4 &micro;g/m&sup3;</div>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Tidak berpengaruh buruk bagi kesehatan.</p>
+            </div>
+            <div class="baku-mutu-item" style="border-top-color:#f59e0b;">
+              <strong style="color:#b45309; font-size:0.95rem;">TIDAK SEHAT SENSITIF</strong>
+              <div style="font-size:1.15rem; font-weight:800; color:#1e293b;">55.5 - 150.4 &micro;g/m&sup3;</div>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Dapat merugikan kelompok berisiko.</p>
+            </div>
+            <div class="baku-mutu-item" style="border-top-color:#ef4444;">
+              <strong style="color:#b91c1c; font-size:0.95rem;">TIDAK SEHAT</strong>
+              <div style="font-size:1.15rem; font-weight:800; color:#1e293b;">150.5 - 250.4 &micro;g/m&sup3;</div>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Tingkat mutu udara merugikan kesehatan.</p>
+            </div>
+            <div class="baku-mutu-item" style="border-top-color:#8b5cf6;">
+              <strong style="color:#6d28d9; font-size:0.95rem;">SANGAT TIDAK SEHAT</strong>
+              <div style="font-size:1.15rem; font-weight:800; color:#1e293b;">250.5 - 500.0 &micro;g/m&sup3;</div>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Dapat meningkatkan risiko gangguan paru.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===================================================================
+         TAB 3: GEMPABUMI & TSUNAMI (PENGGANTI DATABASE TERINTEGRASI)
+         =================================================================== -->
+    <main class="tab-content" id="tab-gempa">
+
+      <!-- Gempabumi Terbaru Highlight Card -->
+      <section class="bmkg-card">
+        <div class="card-header-bmkg">
+          <h3><i class="fa-solid fa-house-crack" style="color:var(--bmkg-red);"></i> Gempabumi Terkini (Real-time InaTEWS BMKG)</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Sumber: Sistem Peringatan Dini Tsunami BMKG</span>
+        </div>
+
+        <div class="card-body-bmkg">
+          <div class="gempa-main-grid">
+            
+            <div class="gempa-highlight-card">
+              <div class="gempa-header-row">
+                <div>
+                  <span style="font-size:0.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">KEKUATAN GEMPA</span>
+                  <div class="gempa-mag-badge">
+                    <span>M</span> <span id="gempa-auto-mag">--</span>
+                  </div>
+                </div>
+
+                <div class="gempa-potensi-box" id="gempa-auto-potensi">
+                  <i class="fa-solid fa-triangle-exclamation"></i> Tidak berpotensi TSUNAMI
+                </div>
+              </div>
+
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted);">PUSAT GEMPABUMI</span>
+                <h3 style="font-family:var(--font-heading); font-size:1.35rem; color:var(--bmkg-navy); margin-top:0.2rem;" id="gempa-auto-wilayah">
+                  Memuat data gempabumi...
+                </h3>
+              </div>
+
+              <!-- Parameter Grid -->
+              <div class="bmkg-metrics-grid">
+                <div class="metric-box">
+                  <div class="metric-icon-wrap" style="color:var(--bmkg-red); background:#fee2e2;"><i class="fa-regular fa-clock"></i></div>
+                  <div class="metric-meta">
+                    <span class="label">Waktu Gempa</span>
+                    <h4 id="gempa-auto-waktu" style="font-size:1.05rem;">--</h4>
+                    <span class="sub" id="gempa-auto-tanggal">--</span>
+                  </div>
+                </div>
+
+                <div class="metric-box">
+                  <div class="metric-icon-wrap" style="color:#d97706; background:#fef3c7;"><i class="fa-solid fa-arrows-down-to-line"></i></div>
+                  <div class="metric-meta">
+                    <span class="label">Kedalaman</span>
+                    <h4 id="gempa-auto-kedalaman">-- km</h4>
+                    <span class="sub">Hiposenter</span>
+                  </div>
+                </div>
+
+                <div class="metric-box">
+                  <div class="metric-icon-wrap" style="color:var(--bmkg-blue); background:var(--bmkg-sky);"><i class="fa-solid fa-location-pin"></i></div>
+                  <div class="metric-meta">
+                    <span class="label">Titik Koordinat</span>
+                    <h4 id="gempa-auto-koordinat" style="font-size:1.05rem;">--</h4>
+                    <span class="sub" id="gempa-auto-lintang-bujur">--</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background:#f8fafc; border:1px solid var(--border-light); padding:0.85rem; border-radius:var(--radius-md);">
+                <strong style="font-size:0.8rem; color:var(--bmkg-navy);"><i class="fa-solid fa-bullhorn"></i> Wilayah Dirasakan (Skala MMI):</strong>
+                <p style="font-size:0.85rem; color:var(--text-body); margin-top:0.25rem;" id="gempa-auto-dirasakan">-</p>
+              </div>
+            </div>
+
+            <!-- Shakemap -->
+            <div class="gempa-shakemap-wrap">
+              <span style="font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:0.6rem; text-transform:uppercase;">
+                PETA GUNCANGAN (SHAKEMAP)
+              </span>
+              <img id="gempa-auto-shakemap" src="assets/img/logo-bmkg.png" alt="Shakemap BMKG">
+              <span style="font-size:0.7rem; color:var(--text-muted); margin-top:0.5rem;">Peta intensitas guncangan resmi BMKG</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Daftar 15 Gempabumi Dirasakan Terkini -->
+      <section class="bmkg-card">
+        <div class="card-header-bmkg">
+          <h3><i class="fa-solid fa-list-ul"></i> Daftar 15 Gempabumi Dirasakan Terkini di Indonesia</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted);">Pembaruan otomatis dari server BMKG</span>
+        </div>
+        <div class="card-body-bmkg">
+          <div class="table-responsive">
+            <table class="bmkg-table">
+              <thead>
+                <tr>
+                  <th>Waktu Kejadian</th>
+                  <th>Magnitudo</th>
+                  <th>Kedalaman</th>
+                  <th>Koordinat</th>
+                  <th>Pusat Gempabumi</th>
+                  <th>Dirasakan (Skala MMI)</th>
+                </tr>
+              </thead>
+              <tbody id="gempa-dirasakan-tbody">
+                <tr>
+                  <td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Mengambil data gempabumi dari BMKG...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- =====================================================================
+       6. FOOTER RESMI BMKG
+       ===================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-container">
+        
+        <!-- Kolom 1: Profil Kantor BMKG Aceh & Pusat -->
+        <div class="footer-col">
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.85rem;">
+            <img src="assets/img/logo-bmkg.png" alt="Logo BMKG" style="width:42px; height:42px;">
+            <div>
+              <h4 style="margin-bottom:0; border:none; padding:0;">BMKG PROVINSI ACEH</h4>
+              <p style="font-size:0.72rem; color:#94a3b8; margin:0;">Stasiun Meteorologi Wilayah Aceh</p>
+            </div>
+          </div>
+          <p><strong>Stasiun Meteorologi Kelas I SIM:</strong> Bandara Internasional Sultan Iskandar Muda, Blang Bintang, Aceh Besar.</p>
+          <p><strong>Stasiun Meteorologi Malikussaleh:</strong> Bandara Malikussaleh, Pinto Makmur, Muara Batu, Aceh Utara - Lhokseumawe.</p>
+          <p><i class="fa-solid fa-phone"></i> Call Center BMKG: 196 &bull; Email: info@bmkg.go.id</p>
+        </div>
+
+        <!-- Kolom 2: Layanan Informasi BMKG -->
+        <div class="footer-col">
+          <h4>Layanan Informasi</h4>
+          <ul class="footer-links">
+            <li><a href="#tab-dashboard">Prakiraan Cuaca Provinsi Aceh</a></li>
+            <li><a href="https://maritim.bmkg.go.id" target="_blank">Cuaca Maritim Selat Malaka &amp; Samudera Hindia</a></li>
+            <li><a href="https://aviation.bmkg.go.id" target="_blank">Cuaca Penerbangan Bandara SIM &amp; Malikussaleh</a></li>
+            <li><a href="https://inatews.bmkg.go.id" target="_blank">InaTEWS Gempa Bumi &amp; Tsunami</a></li>
+            <li><a href="https://cews.bmkg.go.id" target="_blank">Informasi Iklim &amp; Karhutla</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 3: Tautan Terkait -->
+        <div class="footer-col">
+          <h4>Tautan Terkait</h4>
+          <ul class="footer-links">
+            <li><a href="https://data.bmkg.go.id" target="_blank">BMKG Open Data</a></li>
+            <li><a href="https://stmkg.ac.id" target="_blank">Sekolah Tinggi MKG (STMKG)</a></li>
+            <li><a href="https://pusdiklat.bmkg.go.id" target="_blank">Pusdiklat BMKG</a></li>
+            <li><a href="https://perpustakaan.bmkg.go.id" target="_blank">Perpustakaan BMKG</a></li>
+            <li><a href="https://www.wmo.int" target="_blank">WMO (World Meteorological Org)</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 4: Media & Aplikasi Mobile -->
+        <div class="footer-col">
+          <h4>Aplikasi Mobile</h4>
+          <p style="font-size:0.78rem;">Unduh aplikasi <strong>Info BMKG</strong> untuk memantau cuaca dan gempa bumi terkini secara akurat.</p>
+          <div style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;">
+            <div style="background:#00172e; border:1px solid #334155; padding:0.45rem 0.85rem; border-radius:6px; display:inline-flex; align-items:center; gap:0.6rem;">
+              <i class="fa-brands fa-google-play" style="font-size:1.25rem; color:#34d399;"></i>
+              <div>
+                <div style="font-size:0.65rem; color:#94a3b8;">Tersedia di</div>
+                <strong style="color:#ffffff; font-size:0.8rem;">Google Play</strong>
+              </div>
+            </div>
+            <div style="background:#00172e; border:1px solid #334155; padding:0.45rem 0.85rem; border-radius:6px; display:inline-flex; align-items:center; gap:0.6rem;">
+              <i class="fa-brands fa-apple" style="font-size:1.35rem; color:#ffffff;"></i>
+              <div>
+                <div style="font-size:0.65rem; color:#94a3b8;">Unduh di</div>
+                <strong style="color:#ffffff; font-size:0.8rem;">App Store</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-container">
+        <div>
+          &copy; 2026 Badan Meteorologi, Klimatologi, dan Geofisika &bull; Stasiun Meteorologi Provinsi Aceh
+        </div>
+        <div>
+          Layanan Informasi Cuaca, Kualitas Udara, dan Gempabumi Indonesia
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Script -->
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

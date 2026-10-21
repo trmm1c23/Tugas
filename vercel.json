@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/api/wilayah.php", "destination": "/api/wilayah" },
+    { "source": "/api/cuaca.php", "destination": "/api/cuaca" },
+    { "source": "/api/gempa.php", "destination": "/api/gempa" },
+    { "source": "/api/udara.php", "destination": "/api/udara" },
+    { "source": "/api/sync.php", "destination": "/api/sync" }
+  ]
+}

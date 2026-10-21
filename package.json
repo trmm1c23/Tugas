@@ -1,0 +1,9 @@
+{
+  "name": "bmkg-aceh-portal",
+  "version": "1.0.0",
+  "description": "Portal Resmi Prakiraan Cuaca, Kualitas Udara & Gempabumi BMKG Aceh",
+  "private": true,
+  "dependencies": {
+    "mysql2": "^3.11.0"
+  }
+}
